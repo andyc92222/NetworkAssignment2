@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "emulator.h"
-#include "gbn.h"
+#include "sr.h"
 
 /* ******************************************************************
    Go Back N protocol.  Adapted from J.F.Kurose
@@ -61,6 +61,12 @@ static struct pkt buffer[WINDOWSIZE];  /* array for storing packets waiting for 
 static int windowfirst, windowlast;    /* array indexes of the first/last packet awaiting ACK */
 static int windowcount;                /* the number of packets currently awaiting an ACK */
 static int A_nextseqnum;               /* the next sequence number to be used by the sender */
+
+// structure for the sr
+static struct pkt buffer[WINDOWSIZE];
+static int windowfirst, windowlast;
+static int windowcount;
+static int A_nextseqnum;
 
 /* called from layer 5 (application layer), passed the message to be sent to other side */
 void A_output(struct msg message)
