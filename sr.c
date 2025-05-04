@@ -183,9 +183,8 @@ static int B_nextseqnum;   /* the sequence number for the next packets sent by B
 void B_input(struct pkt packet) {
   int i;
   struct pkt ackpkt;
-  int seqnum = packet.seqnum;
   int checksum = packet.seqnum + packet.acknum;
-
+  
   for (i = 0; i < 20; i++) {
       checksum += packet.payload[i];
   }
@@ -193,30 +192,30 @@ void B_input(struct pkt packet) {
   if (checksum != packet.checksum) {
       printf("----B: packet corrupted or not expected sequence number, resend ACK!\n");
       ackpkt.acknum = (expected_seqnum + SEQSPACE - 1) % SEQSPACE;
-      ackpkt.seqnum = -1;
+      ackpkt.seqnum = NOTINUSE;
       ackpkt.checksum = ackpkt.acknum + ackpkt.seqnum;
       for (i = 0; i < 20; i++) ackpkt.payload[i] = 0;
-      tolayer3(1, ackpkt);
+      tolayer3(B, ackpkt);
       return;
   }
 
-  if ((seqnum < 0) || (seqnum >= SEQSPACE)) return;
-
-  if (!received[seqnum]) {
-      recv_buffer[seqnum] = packet;
-      received[seqnum] = true;
+  if (!received[packet.seqnum]) {
+      recv_buffer[packet.seqnum] = packet;
+      received[packet.seqnum] = true;
+      packets_received++;
+      printf("----B: packet %d is correctly received, send ACK!\n", packet.seqnum);
+  } else {
+      printf("----B: duplicate packet %d received, resend ACK!\n", packet.seqnum);
   }
 
-  ackpkt.acknum = seqnum;
-  ackpkt.seqnum = -1;
-  ackpkt.checksum = ackpkt.acknum + ackpkt.seqnum;
+  ackpkt.acknum = packet.seqnum;
+  ackpkt.seqnum = NOTINUSE;
   for (i = 0; i < 20; i++) ackpkt.payload[i] = 0;
-  printf("----B: packet %d is correctly received, send ACK!\n", packet.seqnum);
-  tolayer3(1, ackpkt);
+  ackpkt.checksum = ackpkt.acknum + ackpkt.seqnum;
+  tolayer3(B, ackpkt);
 
-  /* Deliver packets*/
   while (received[expected_seqnum]) {
-      tolayer5(1, recv_buffer[expected_seqnum].payload);
+      tolayer5(B, recv_buffer[expected_seqnum].payload);
       received[expected_seqnum] = false;
       expected_seqnum = (expected_seqnum + 1) % SEQSPACE;
   }
