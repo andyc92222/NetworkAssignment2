@@ -177,7 +177,7 @@ void A_init(void)
 
 /********* Receiver (B)  variables and procedures ************/
 
-static int expectedseqnum; /* the sequence number expected next by the receiver */
+
 static int B_nextseqnum;   /* the sequence number for the next packets sent by B */
 
 
@@ -204,7 +204,6 @@ void B_input(struct pkt packet) {
   if (!received[packet.seqnum]) {
       recv_buffer[packet.seqnum] = packet;
       received[packet.seqnum] = true;
-      packets_received++;
       printf("----B: packet %d is correctly received, send ACK!\n", packet.seqnum);
   } else {
       printf("----B: duplicate packet %d received, resend ACK!\n", packet.seqnum);
@@ -220,6 +219,7 @@ void B_input(struct pkt packet) {
       tolayer5(B, recv_buffer[expected_seqnum].payload);
       received[expected_seqnum] = false;
       expected_seqnum = (expected_seqnum + 1) % SEQSPACE;
+      packets_received++;
   }
 }
 
@@ -227,8 +227,12 @@ void B_input(struct pkt packet) {
 /* entity B routines are called. You can use it to do any initialization */
 void B_init(void)
 {
-  expectedseqnum = 0;
-  B_nextseqnum = 1;
+    int i;
+    expected_seqnum = 0;
+    B_nextseqnum = 1;
+    for (i = 0; i < SEQSPACE; i++) {
+        received[i] = false;
+    }
 }
 
 /******************************************************************************
