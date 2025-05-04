@@ -63,10 +63,11 @@ static int windowcount;                /* the number of packets currently awaiti
 static int A_nextseqnum;               /* the next sequence number to be used by the sender */
 
 // structure for the sr
-static struct pkt buffer[WINDOWSIZE];
-static int windowfirst, windowlast;
-static int windowcount;
-static int A_nextseqnum;
+static struct pkt window[SEQSPACE];
+static bool acked[SEQSPACE];
+static double send_times[SEQSPACE];
+static int base = 0;
+static int nextseqnum = 0;
 
 /* called from layer 5 (application layer), passed the message to be sent to other side */
 void A_output(struct msg message)
