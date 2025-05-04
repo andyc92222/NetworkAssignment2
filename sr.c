@@ -124,7 +124,8 @@ void A_input(struct pkt packet) {
 
   /* Mark acknowledged */
   acked[acknum] = true;
-  printf("----A: ACK %d is not a duplicate, marking as received\n", acknum);
+  printf("----A: uncorrupted ACK %d is received\n", acknum);
+  printf("----A: ACK %d is not a duplicate\n", acknum);
   new_ACKs++;
 
   while (acked[base]) {
