@@ -1,3 +1,9 @@
+#ifndef SR_H
+#define SR_H
+extern int window_full;
+extern int packets_resent;
+extern int new_ACKs;
+extern int packets_received;
 extern void A_init(void);
 extern void B_init(void);
 extern void A_input(struct pkt);
@@ -9,3 +15,4 @@ extern void A_timerinterrupt(void);
 #define BIDIRECTIONAL 0       /*  0 = A->B  1 =  A<->B */
 extern void B_output(struct msg);
 extern void B_timerinterrupt(void);
+#endif
