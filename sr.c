@@ -57,11 +57,6 @@ bool IsCorrupted(struct pkt packet)
 
 /********* Sender (A) variables and functions ************/
 
-static struct pkt buffer[WINDOWSIZE];  /* array for storing packets waiting for ACK */
-static int windowfirst, windowlast;    /* array indexes of the first/last packet awaiting ACK */
-static int windowcount;                /* the number of packets currently awaiting an ACK */
-static int A_nextseqnum;               /* the next sequence number to be used by the sender */
-
 /* structure for the sr */
 static struct pkt window[SEQSPACE];
 static bool acked[SEQSPACE];
@@ -148,7 +143,7 @@ void A_input(struct pkt packet) {
 void A_timerinterrupt(void) {
   int i;
   printf("----A: time out, resend unACKed packets!\n");
-  starttimer(0, TIMEOUT);  // Restart timer for SR
+  starttimer(0, TIMEOUT);
 
   for (i = 0; i < SEQSPACE; i++) {
     if (!acked[i] && ((base < nextseqnum && i >= base && i < nextseqnum) ||
