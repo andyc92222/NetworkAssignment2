@@ -222,10 +222,10 @@ void B_input(struct pkt packet) {
   tolayer3(B, ackpkt);
 
   while (received[expected_seqnum]) {
-      tolayer5(B, recv_buffer[expected_seqnum].payload);
-      received[expected_seqnum] = false;
-      expected_seqnum = (expected_seqnum + 1) % SEQSPACE;
-      packets_received++;
+     tolayer5(B, recv_buffer[expected_seqnum].payload);
+     received[expected_seqnum] = false;
+     expected_seqnum = (expected_seqnum + 1) % SEQSPACE;
+     packets_received++;
   }
 }
 

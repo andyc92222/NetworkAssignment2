@@ -1,3 +1,53 @@
+commit dfa95db496ca586933a537d74330ad85ff8f4c2d
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 02:11:17 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 02:11:17 2025 +0930
+
+    19
+    
+    fixing the A_input function to get the new ack value correctly
+
+commit 331427554e8fa8e0df1366b533ec4663d9bda37f
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 01:55:25 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 01:55:25 2025 +0930
+
+    18
+    
+    fixing the wrong received packet number problem because of putting the ++ at the wrong place
+
+commit 1cd9295454832abb46dfad868fc9b1a16b1fd36b
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 01:37:13 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 01:37:13 2025 +0930
+
+    17
+    
+    fixed the full window variable
+
+commit 6b15a105ef43642bc615052e97ebd3ecce05524b
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 01:19:34 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 01:19:34 2025 +0930
+
+    16
+    
+    matching gradescope
+
+commit fdc1f27a1be52abce7ec1b7104d547bdf9694deb
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 00:49:32 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 00:49:32 2025 +0930
+
+    15
+    
+    adding new git file
+
 commit 911ab8cb8fa2b78434bc5ada4524dbf8e060eeef
 Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
 AuthorDate: Mon May 5 00:48:28 2025 +0930
