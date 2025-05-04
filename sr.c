@@ -21,12 +21,12 @@
    - fixed C style to adhere to current programming style
    - added GBN implementation
 **********************************************************************/
-
 #define RTT  16.0       /* round trip time.  MUST BE SET TO 16.0 when submitting assignment */
 #define WINDOWSIZE 6    /* the maximum number of buffered unacked packet
                           MUST BE SET TO 6 when submitting assignment */
 #define SEQSPACE 7      /* the min sequence space for GBN must be at least windowsize + 1 */
 #define NOTINUSE (-1)   /* used to fill header fields that are not being used */
+#define TIMEOUT 16.0
 
 /* generic procedure to compute the checksum of a packet.  Used by both sender and receiver
    the simulator will overwrite part of your packet with 'z's.  It will not overwrite your
@@ -62,55 +62,43 @@ static int windowfirst, windowlast;    /* array indexes of the first/last packet
 static int windowcount;                /* the number of packets currently awaiting an ACK */
 static int A_nextseqnum;               /* the next sequence number to be used by the sender */
 
-// structure for the sr
+/* structure for the sr */
 static struct pkt window[SEQSPACE];
 static bool acked[SEQSPACE];
-static double send_times[SEQSPACE];
 static int base = 0;
 static int nextseqnum = 0;
 
-/* called from layer 5 (application layer), passed the message to be sent to other side */
-void A_output(struct msg message)
-{
-  struct pkt sendpkt;
+/* new A_output function for sr */
+void A_output(struct msg message) {
+  struct pkt pkt;
   int i;
 
-  /* if not blocked waiting on ACK */
-  if ( windowcount < WINDOWSIZE) {
-    if (TRACE > 1)
-      printf("----A: New message arrives, send window is not full, send new messge to layer3!\n");
-
-    /* create packet */
-    sendpkt.seqnum = A_nextseqnum;
-    sendpkt.acknum = NOTINUSE;
-    for ( i=0; i<20 ; i++ )
-      sendpkt.payload[i] = message.data[i];
-    sendpkt.checksum = ComputeChecksum(sendpkt);
-
-    /* put packet in window buffer */
-    /* windowlast will always be 0 for alternating bit; but not for GoBackN */
-    windowlast = (windowlast + 1) % WINDOWSIZE;
-    buffer[windowlast] = sendpkt;
-    windowcount++;
-
-    /* send out packet */
-    if (TRACE > 0)
-      printf("Sending packet %d to layer 3\n", sendpkt.seqnum);
-    tolayer3 (A, sendpkt);
-
-    /* start timer if first packet in window */
-    if (windowcount == 1)
-      starttimer(A,RTT);
-
-    /* get next sequence number, wrap back to 0 */
-    A_nextseqnum = (A_nextseqnum + 1) % SEQSPACE;
+  /* Check if the window is full or not*/
+  if ((nextseqnum + SEQSPACE - base) % SEQSPACE >= WINDOWSIZE) {
+      printf("----A: Window full, dropping message\n");
+      return;
   }
-  /* if blocked,  window is full */
-  else {
-    if (TRACE > 0)
-      printf("----A: New message arrives, send window is full\n");
-    window_full++;
-  }
+
+  /* Create the packet */
+  pkt.seqnum = nextseqnum;
+  pkt.acknum = -1;
+  for (i = 0; i < 20; ++i)
+      pkt.payload[i] = message.data[i];
+  pkt.checksum = pkt.seqnum + pkt.acknum;
+  for (i = 0; i < 20; ++i)
+      pkt.checksum += pkt.payload[i];
+
+  /* Save and send */
+  window[nextseqnum] = pkt;
+  acked[nextseqnum] = false;
+  printf("----A: Sending packet %d to layer 3\n", pkt.seqnum);
+  tolayer3(0, pkt);
+
+  /* timer*/
+  if (base == nextseqnum)
+      starttimer(0, TIMEOUT);
+
+  nextseqnum = (nextseqnum + 1) % SEQSPACE;
 }
 
 
