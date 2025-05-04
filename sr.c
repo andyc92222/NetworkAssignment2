@@ -90,7 +90,8 @@ void A_output(struct msg message) {
   /* Save and send */
   window[nextseqnum] = pkt;
   acked[nextseqnum] = false;
-  printf("----A: Sending packet %d to layer 3\n", pkt.seqnum);
+  printf("----A: New message arrives, send window is not full, send new messge to layer3!\n");
+  printf("Sending packet %d to layer 3\n", pkt.seqnum);
   tolayer3(0, pkt);
 
   /* timer*/
@@ -210,7 +211,7 @@ void B_input(struct pkt packet) {
   ackpkt.seqnum = -1;
   ackpkt.checksum = ackpkt.acknum + ackpkt.seqnum;
   for (i = 0; i < 20; i++) ackpkt.payload[i] = 0;
-  printf("----B: sending ACK %d\n", ackpkt.acknum);
+  printf("----B: packet %d is correctly received, send ACK!\n", packet.seqnum);
   tolayer3(1, ackpkt);
 
   /* Deliver packets*/
