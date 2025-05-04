@@ -27,6 +27,10 @@
 #define SEQSPACE 12      /* the min sequence space for GBN must be at least windowsize + 1 */
 #define NOTINUSE (-1)   /* used to fill header fields that are not being used */
 #define TIMEOUT 16.0
+extern int packets_resent;
+extern int packets_received;
+extern int new_ACKs;
+int messages_dropped;
 
 /* generic procedure to compute the checksum of a packet.  Used by both sender and receiver
    the simulator will overwrite part of your packet with 'z's.  It will not overwrite your
@@ -74,8 +78,9 @@ void A_output(struct msg message) {
 
   /* Check if the window is full or not*/
   if ((nextseqnum + SEQSPACE - base) % SEQSPACE >= WINDOWSIZE) {
-      printf("----A: Window full, dropping message\n");
-      return;
+    printf("----A: New message arrives, send window is full\n");
+    messages_dropped++;
+    return;
   }
 
   /* Create the packet */
@@ -144,7 +149,7 @@ void A_input(struct pkt packet) {
 /* called when A's timer goes off */
 void A_timerinterrupt(void) {
   int i;
-  printf("----A: time out, resend unACKed packets!\n");
+  printf("----A: time out,resend packets!\n");
   starttimer(0, TIMEOUT);
 
   for (i = 0; i < SEQSPACE; i++) {
