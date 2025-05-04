@@ -145,21 +145,18 @@ void A_input(struct pkt packet) {
 }
 
 /* called when A's timer goes off */
-void A_timerinterrupt(void)
-{
+void A_timerinterrupt(void) {
   int i;
+  printf("----A: time out, resend unACKed packets!\n");
+  starttimer(0, TIMEOUT);  // Restart timer for SR
 
-  if (TRACE > 0)
-    printf("----A: time out,resend packets!\n");
-
-  for(i=0; i<windowcount; i++) {
-
-    if (TRACE > 0)
-      printf ("---A: resending packet %d\n", (buffer[(windowfirst+i) % WINDOWSIZE]).seqnum);
-
-    tolayer3(A,buffer[(windowfirst+i) % WINDOWSIZE]);
-    packets_resent++;
-    if (i==0) starttimer(A,RTT);
+  for (i = 0; i < SEQSPACE; i++) {
+    if (!acked[i] && ((base < nextseqnum && i >= base && i < nextseqnum) ||
+                      (base > nextseqnum && (i >= base || i < nextseqnum)))) {
+      printf("----A: Resending packet %d\n", i);
+      tolayer3(0, window[i]);
+      packets_resent++;
+    }
   }
 }
 
