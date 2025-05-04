@@ -1,0 +1,99 @@
+commit e3c55bfa131b081f25676fd5eaf775530d2f5285
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 00:08:12 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 00:08:12 2025 +0930
+
+    10
+    
+    fixing the timer function, just noticed this because of removing the previous struct being used
+
+commit f69de73d390c9bc5991bdf87a8f442924577c84f
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 23:59:34 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 23:59:34 2025 +0930
+
+    9
+    
+    removing the unuse struct
+
+commit 52811dc34e2da349b1e27d9ca8e5181fc3bca745
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 23:57:02 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 23:57:02 2025 +0930
+
+    8
+    
+    fixing the timer
+
+commit a74256e3f0347bd8dfddb0e845951bcc7e119535
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 22:40:13 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 22:40:13 2025 +0930
+
+    7
+    
+    implement the B_input function and change the value of seqspace to match the requirement for sr, also added a new buffer structure
+
+commit ec5c729d8def85b333b1f7121efd8df256286a1f
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 19:54:36 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 19:54:36 2025 +0930
+
+    6
+    
+    implement the A_input function for sr
+
+commit fc0569bf39876ebf894e716a7a652db2516bfb80
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 18:57:10 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 18:57:10 2025 +0930
+
+    5
+    
+    implement the A_output function for the sr.
+
+commit 81209d7bb7b29c473ca744538f3ac748cf3f4f73
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 18:12:37 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 18:12:37 2025 +0930
+
+    4
+    
+    new struct for the sr the previous commit just have the wrong one
+
+commit 75b09a11ee36a80dc93c356998cd6aa6747e6397
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sun May 4 18:05:36 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sun May 4 18:05:36 2025 +0930
+
+    3
+    
+    creating the structure for the sr
+
+commit ad8b9a7a3ad2544f9dfe8174d523bc0e54ebe088
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sat May 3 18:40:23 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Sat May 3 18:40:23 2025 +0930
+
+    2
+    
+    copying the gpn files to the sr file so that we can modify later
+
+commit f0383b79046d7e4ea65e506c04923556eba0d705
+Author:     Po Yu Chen <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Sat May 3 18:23:21 2025 +0930
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat May 3 18:23:21 2025 +0930
+
+    1
+    
+    uploading all the needed files
