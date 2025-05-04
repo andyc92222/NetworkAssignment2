@@ -109,6 +109,7 @@ void A_output(struct msg message) {
 void A_input(struct pkt packet) {
   int acknum = packet.acknum;
   int i;
+  int in_window;
   /* Check for corruption */
   int checksum = packet.seqnum + packet.acknum;
   for (i = 0; i < 20; i++)
@@ -118,6 +119,11 @@ void A_input(struct pkt packet) {
       printf("----A: corrupted ACK received, ignoring\n");
       return;
   }
+  in_window = (base <= acknum && acknum < nextseqnum) || (base > nextseqnum && (acknum >= base || acknum < nextseqnum));
+  if (!in_window) {
+      printf("----A: ACK %d is outside of current window, ignoring\n", acknum);
+      return;
+    }
   if (acked[acknum]) {
       printf("----A: duplicate ACK %d received, do nothing!\n", acknum);
       return;
