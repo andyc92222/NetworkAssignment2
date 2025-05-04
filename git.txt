@@ -1,3 +1,43 @@
+commit 911ab8cb8fa2b78434bc5ada4524dbf8e060eeef
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 00:48:28 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 00:48:28 2025 +0930
+
+    14
+    
+    matching autograder
+
+commit 60490fda62d5c3e97a032dbd99e9bb5208b87c50
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 00:34:00 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 00:34:00 2025 +0930
+
+    13
+    
+    fixing b input function to run correctly for delivering to tolayer5
+
+commit a6c04001279ccd9d9571e16866192ea0ad4cbdb7
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 00:19:27 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 00:19:27 2025 +0930
+
+    12
+    
+    changing the printf to match autograder
+
+commit edb8d5445d0ed3f9e8ef0296f1287193c2a556e6
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 00:09:38 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 00:09:38 2025 +0930
+
+    11
+    
+    adding the git.txt file
+
 commit e3c55bfa131b081f25676fd5eaf775530d2f5285
 Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
 AuthorDate: Mon May 5 00:08:12 2025 +0930
