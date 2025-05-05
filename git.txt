@@ -1,3 +1,23 @@
+commit c2254d3718c5762e41a78fee6a8d3e130816482e
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 09:54:57 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 09:54:57 2025 +0930
+
+    21
+    
+    trying to fix the timer
+
+commit 907338bb7ffb59430d4c9dbf1e299dcc9d5cf670
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 02:29:46 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 02:29:46 2025 +0930
+
+    20
+    
+    adding a new git file
+
 commit dfa95db496ca586933a537d74330ad85ff8f4c2d
 Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
 AuthorDate: Mon May 5 02:11:17 2025 +0930
