@@ -107,7 +107,6 @@ void A_output(struct msg message) {
    In this practical this will always be an ACK as B never sends data.
 */
 void A_input(struct pkt packet) {
-  int i;
   int acknum = packet.acknum;
   int in_window;
 
