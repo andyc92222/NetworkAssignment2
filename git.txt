@@ -1,3 +1,43 @@
+commit a6631069cc8b242123a411b75faf0229eaf76a37
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 14:41:04 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 14:41:04 2025 +0930
+
+    32
+    
+    changing the order of the log message
+
+commit 0d3b629fb7a5de309ab940e22cb9f04a0e927e88
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 13:56:08 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 13:56:08 2025 +0930
+
+    31
+    
+    trying through gradescope
+
+commit e8a88a4271ecc1dffc8494259262c2660bc58988
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 13:53:08 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 13:53:08 2025 +0930
+
+    30
+    
+    trying to match the autograde
+
+commit 75611698e30856af71b10d2ed137d4220c90c1b4
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 12:12:04 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 12:12:04 2025 +0930
+
+    29
+    
+    new git file
+
 commit b956b2786d958dd5255627be12e640633633bcc6
 Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
 AuthorDate: Mon May 5 12:11:28 2025 +0930
