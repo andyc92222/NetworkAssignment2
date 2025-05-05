@@ -1,3 +1,23 @@
+commit b956b2786d958dd5255627be12e640633633bcc6
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 12:11:28 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 12:11:28 2025 +0930
+
+    28
+    
+    fixing the timer to run through all those not received ack
+
+commit e0805a10208183a00358bae1147f240ae1257afc
+Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+AuthorDate: Mon May 5 11:36:40 2025 +0930
+Commit:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
+CommitDate: Mon May 5 11:36:40 2025 +0930
+
+    27
+    
+    checking which code version has the best score
+
 commit 49c68a8173d4ad7d446ba3fb9c05c8b3334fa2de
 Author:     andyc92222 <126429483+andyc92222@users.noreply.github.com>
 AuthorDate: Mon May 5 11:07:28 2025 +0930
