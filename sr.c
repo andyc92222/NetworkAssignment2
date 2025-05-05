@@ -150,8 +150,8 @@ void A_input(struct pkt packet) {
 
 /* called when A's timer goes off */
 void A_timerinterrupt(void) {
-  printf("----A: time out, resend packets!\n");
-  printf("----A: Resending packet %d\n", base);
+  printf("----A: time out,resend packets!\n");
+  printf("---A: resending packet %d\n", base);
   starttimer(0, TIMEOUT);
 
   tolayer3(0, window[base]);
