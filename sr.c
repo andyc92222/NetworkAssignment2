@@ -150,18 +150,18 @@ void A_input(struct pkt packet) {
 
 /* called when A's timer goes off */
 void A_timerinterrupt(void) {
-  int i;
+  int i = base;
+  int sent = 0;
   printf("----A: time out,resend packets!\n");
 
-  i = base;
-  while (i != nextseqnum) {
-    if (!acked[i]) {
-      printf("---A: resending packet %d\n", i);
-      tolayer3(0, window[i]);
-      packets_resent++;
-      break;
-    }
-    i = (i + 1) % SEQSPACE;
+  while (sent < WINDOWSIZE && i != nextseqnum) {
+      if (!acked[i]) {
+          printf("---A: resending packet %d\n", i);
+          tolayer3(0, window[i]);
+          packets_resent++;
+      }
+      i = (i + 1) % SEQSPACE;
+      sent++;
   }
 
   starttimer(0, TIMEOUT);
