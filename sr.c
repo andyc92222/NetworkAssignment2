@@ -150,12 +150,21 @@ void A_input(struct pkt packet) {
 
 /* called when A's timer goes off */
 void A_timerinterrupt(void) {
+  int i;
   printf("----A: time out,resend packets!\n");
-  printf("---A: resending packet %d\n", base);
-  starttimer(0, TIMEOUT);
 
-  tolayer3(0, window[base]);
-  packets_resent++;
+  i = base;
+  while (i != nextseqnum) {
+    if (!acked[i]) {
+      printf("---A: resending packet %d\n", i);
+      tolayer3(0, window[i]);
+      packets_resent++;
+      break;
+    }
+    i = (i + 1) % SEQSPACE;
+  }
+
+  starttimer(0, TIMEOUT);
 }
 
 
@@ -200,14 +209,14 @@ void B_input(struct pkt packet) {
       tolayer3(B, ackpkt);
       return;
   }
-  packets_received++;
 
   if (!received[packet.seqnum]) {
       recv_buffer[packet.seqnum] = packet;
       received[packet.seqnum] = true;
+      packets_received++;
       printf("----B: packet %d is correctly received, send ACK!\n", packet.seqnum);
   } else {
-      printf("----B: duplicate packet %d received, resend ACK!\n", packet.seqnum);
+      printf("----B: packet %d is correctly received, send ACK!\n", packet.seqnum);
   }
 
   ackpkt.acknum = packet.seqnum;
