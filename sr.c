@@ -110,23 +110,23 @@ void A_input(struct pkt packet) {
   int acknum = packet.acknum;
   int in_window;
 
-  total_ACKs_received++;
-
   if (!IsCorrupted(packet)) {
-    if (TRACE > 0)
-      printf("----A: uncorrupted ACK %d is received\n", acknum);
+    in_window = (base <= acknum && acknum < base + WINDOWSIZE) ||
+                (base + WINDOWSIZE >= SEQSPACE && 
+                 (acknum < (base + WINDOWSIZE) % SEQSPACE || acknum >= base));
 
-    in_window = (base <= acknum && acknum < nextseqnum) || 
-                (base > nextseqnum && (acknum >= base || acknum < nextseqnum));
-    
     if (in_window && !acked[acknum]) {
+      if (TRACE > 0)
+        printf("----A: uncorrupted ACK %d is received\n", acknum);
       if (TRACE > 0)
         printf("----A: ACK %d is not a duplicate\n", acknum);
 
       acked[acknum] = true;
       new_ACKs++;
+      total_ACKs_received++;
 
       while (acked[base]) {
+        acked[base] = false;
         base = (base + 1) % SEQSPACE;
       }
 
@@ -135,9 +135,12 @@ void A_input(struct pkt packet) {
         starttimer(0, TIMEOUT);
       }
 
-    } else {
+    } else if (in_window && acked[acknum]) {
+      if (TRACE > 0)
+        printf("----A: uncorrupted ACK %d is received\n", acknum);
       if (TRACE > 0)
         printf("----A: duplicate ACK received, do nothing!\n");
+      total_ACKs_received++;
     }
   } else {
     if (TRACE > 0)
