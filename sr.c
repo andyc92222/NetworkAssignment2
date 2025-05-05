@@ -107,61 +107,59 @@ void A_output(struct msg message) {
    In this practical this will always be an ACK as B never sends data.
 */
 void A_input(struct pkt packet) {
-  int acknum = packet.acknum;
   int i;
+  int acknum = packet.acknum;
   int in_window;
-  /* Check for corruption */
-  int checksum = packet.seqnum + packet.acknum;
-  for (i = 0; i < 20; i++)
-      checksum += packet.payload[i];
 
-  if (checksum != packet.checksum) {
-      printf("----A: corrupted ACK received, ignoring\n");
-      return;
-  }
-  in_window = (base <= acknum && acknum < nextseqnum) || (base > nextseqnum && (acknum >= base || acknum < nextseqnum));
-  if (!in_window) {
-      printf("----A: ACK %d is outside of current window, ignoring\n", acknum);
-      return;
+  total_ACKs_received++;
+
+  if (!IsCorrupted(packet)) {
+    if (TRACE > 0)
+      printf("----A: uncorrupted ACK %d is received\n", acknum);
+
+    in_window = (base <= acknum && acknum < nextseqnum) || 
+                (base > nextseqnum && (acknum >= base || acknum < nextseqnum));
+    
+    if (in_window && !acked[acknum]) {
+      if (TRACE > 0)
+        printf("----A: ACK %d is not a duplicate\n", acknum);
+
+      acked[acknum] = true;
+      new_ACKs++;
+
+      while (acked[base]) {
+        base = (base + 1) % SEQSPACE;
+      }
+
+      stoptimer(0);
+      if (base != nextseqnum) {
+        starttimer(0, TIMEOUT);
+      }
+
+    } else {
+      if (TRACE > 0)
+        printf("----A: duplicate ACK received, do nothing!\n");
     }
-  if (acked[acknum]) {
-      printf("----A: duplicate ACK %d received, do nothing!\n", acknum);
-      return;
-  }
-
-  /* Mark acknowledged */
-  acked[acknum] = true;
-  printf("----A: uncorrupted ACK %d is received\n", acknum);
-  printf("----A: ACK %d is not a duplicate\n", acknum);
-  new_ACKs++;
-
-  while (acked[base]) {
-      base = (base + 1) % SEQSPACE;
-  }
-
-  /* If window is empty, stop timer else restart */
-  if (base == nextseqnum) {
-      stoptimer(0);
   } else {
-      stoptimer(0);
-      starttimer(0, TIMEOUT);
+    if (TRACE > 0)
+      printf("----A: corrupted ACK is received, do nothing!\n");
   }
 }
 
 /* called when A's timer goes off */
 void A_timerinterrupt(void) {
-  int i = base;
-  int sent = 0;
+  int i;
   printf("----A: time out,resend packets!\n");
 
-  while (sent < WINDOWSIZE && i != nextseqnum) {
-      if (!acked[i]) {
-          printf("---A: resending packet %d\n", i);
-          tolayer3(0, window[i]);
-          packets_resent++;
-      }
-      i = (i + 1) % SEQSPACE;
-      sent++;
+  i = base;
+  while (i != nextseqnum) {
+    if (!acked[i]) {
+      printf("---A: resending packet %d\n", i);
+      tolayer3(0, window[i]);
+      packets_resent++;
+      break;
+    }
+    i = (i + 1) % SEQSPACE;
   }
 
   starttimer(0, TIMEOUT);
